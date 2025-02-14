@@ -1,0 +1,23 @@
+export const cores = {
+    primary: '#365F27',
+    background: '#f4f4f4',
+    inputLabel: '#000',
+    black:'#000',
+    inputBackground: '#e6e6e6',
+    white: '#fff',
+    orange: '#FFAC1C',
+    whiteSmoke: '#f5f5f5',
+	ghostWhite: '#f8f8ff',
+    vermelho:  '#EB0303',
+    amarelo: '#FFF200',
+    fundo: '#c1c1c1',
+    menuItem: '#d1d1d1',
+    laranja:'#FF6600',
+    cinzaClaro: '#fafafa',
+    dourado: '#FDCC0D',
+    searchFieldBackground: '#f1f4f9',
+    searchIconColor: '#5b5b5b',
+    purple: 'purple',
+    stars: '#f8af08',
+    whats: '#008000'
+ };
