@@ -25,6 +25,7 @@ const Form2 = () => {
     const [coordGeo,setCoordGeo] = useState('');
     const [municipio,setMunicipio] = useState('');
     const [cep,setCep] = useState('');
+    const [nome,setNome] = useState('');
 
 useEffect(() => {
   setCep(insertCepMask(cep));
@@ -36,6 +37,7 @@ useEffect(() => {
         <SafeAreaView style={styles.container}>
             <StatusBar animated={true} backgroundColor={'#fff'} barStyle="dark-content"/>
             <ScrollView showsVerticalScrollIndicator={false}>
+              
                 <FormInput label={'Nome:'} value={nomeImovel} onChangeText={t=>setNomeImovel(t)} placeholder="Informe o nome do imóvel"/>
                 <FormInput label={'Área Total:'} value={areaTotal} onChangeText={t=>setAreaTotal(t)}placeholder={'Informe a área total do imóvel'} keyboardType={'number-pad'}/>
                 <FormInput  label={'Região:'} value={regiao} onChangeText={t=>setRegiao(t)} placeholder={'Informe a região do imóvel'}/>
@@ -43,6 +45,8 @@ useEffect(() => {
                 <FormInput  label={'Coordenadas geográficas:'}  value={coordGeo} onChangeText={t=>setCoordGeo(t)} placeholder={'Informe a latitude e longitude do imóvel'}/>
                 <SelectInput label={'Município:'} placeholder={'Selecione o Município'} modalTitle={'Selecione o Município'} options={cidades} onChangeSelect={setMunicipio}/>
                 <FormInput keyboardType='number-pad' label={'CEP:'} value={cep} onChangeText={t=>setCep(t)} placeholder="Informe o CEP do imóvel"/>
+             
+           
             </ScrollView>
         </SafeAreaView>
     </KeyboardAvoidingView>

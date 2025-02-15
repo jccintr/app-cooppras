@@ -35,7 +35,7 @@ const Etapas = ({navigation}) => {
         />
         <HeightSpacer h={20}/>
         <Botao 
-            onPress={()=>navigation.navigate('form2')} 
+            onPress={()=>navigation.navigate('form3')} 
             text={'Carecterísticas da Propriedade'} 
             textSize={16} 
             textColor={cores.white} 
