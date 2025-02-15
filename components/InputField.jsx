@@ -55,8 +55,6 @@ const styles = StyleSheet.create({
       paddingHorizontal: 4,
       color: '#000',
       marginLeft: 10,
-     // color: cores.azulEscuro,
-      
       height: 48,
     },
    

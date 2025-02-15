@@ -21,10 +21,10 @@ const SelectInput = ({label,placeholder,modalTitle,options,onChangeSelect}) => {
       setSelected(item);
    }
 
-   const SelectItem = ({item,index}) => {
+   const SelectItem = ({item}) => {
 
     return (
-        <TouchableOpacity key={index} style={[styles.selectItem,{backgroundColor:item===selected?'#eee':'#fff'}]} onPress={()=>onChange(item)}>
+        <TouchableOpacity style={[styles.selectItem,{backgroundColor:item===selected?'#eee':'#fff'}]} onPress={()=>onChange(item)}>
               <Text style={styles.selectItemText}>{item}</Text>
               {item===selected&&<Entypo name="check" size={24} color={cores.black}/>}
         </TouchableOpacity>
@@ -36,16 +36,16 @@ const SelectInput = ({label,placeholder,modalTitle,options,onChangeSelect}) => {
   return (
 
       <>
-            <View style={styles.area}> 
-
-            <Text style={{color:cores.inputLabel, fontWeight:'bold',marginBottom: 5,marginLeft:5}}>{label}</Text>
-            <TouchableOpacity style={styles.container} onPress={()=>setModalVisible(true)}>
-                <Text style={styles.label} numberOfLines={1}>{title}</Text>
-                <Entypo name="chevron-down" size={24} color={cores.black} />
-            </TouchableOpacity>
+            <View style={styles.select}> 
+                <Text style={{color:cores.inputLabel, fontWeight:'bold',marginBottom: 5,marginLeft:5}}>{label}</Text>
+                <TouchableOpacity style={styles.container} onPress={()=>setModalVisible(true)}>
+                    <Text style={styles.label} numberOfLines={1}>{title}</Text>
+                    <Entypo name="chevron-down" size={24} color={cores.black} />
+                </TouchableOpacity>
             </View>
-            <Modal visible={modalVisible} animationType="slide" onRequestClose={()=>setModalVisible(false)}>
-                <SafeAreaView style={{marginTop:5}}>
+
+            <Modal visible={modalVisible} transparent={false} animationType="slide" onRequestClose={()=>setModalVisible(false)}>
+               
                     <View style={styles.header}>
                         <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}} onPress={()=>setModalVisible(false)}>
                             <Text style={styles.modaltitle}>{modalTitle}</Text>
@@ -57,10 +57,10 @@ const SelectInput = ({label,placeholder,modalTitle,options,onChangeSelect}) => {
                     </View>
                     <FlatList 
                     data={options}
-                    keyExtractor={(item)=>item.id}
-                    renderItem={({item,index})=><SelectItem index={index} item={item} />}
+                    keyExtractor={(item)=>item}
+                    renderItem={({item})=><SelectItem  item={item} />}
                     />
-                </SafeAreaView>
+               
             </Modal>
       </>
    );
@@ -70,16 +70,14 @@ export default SelectInput
 
 const styles = StyleSheet.create({
 
-area: {
+select: {
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-   
     width: '100%',
     
-},
+  },
 container: {
-
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -88,26 +86,26 @@ container: {
     paddingHorizontal: 12,
     borderRadius:10,
     borderWidth:1,
-    borderColor: cores.azulEscuro,
     marginBottom: 15,
 },
 label:{
-    
    fontSize: 14, 
    color: cores.inputLabel,
 },
 header:{
     flexDirection:'row',
+    alignItems: 'center',
     justifyContent:'space-between',
-    paddingHorizontal:12,
-    paddingBottom:12,
+    padding:12,
     borderBottomWidth:1,
     borderBottomColor: '#ddd',
-    alignItems: 'center',
+   
+   
 },
 modaltitle:{
     fontSize: 18,
     color: '#555',
+    fontWeight:'bold'
 },
 modalCancel:{
     fontSize: 14,
