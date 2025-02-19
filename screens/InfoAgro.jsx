@@ -4,15 +4,15 @@ import Botao from '../components/reusable/Botao'
 import HeightSpacer from '../components/reusable/HeightSpacer'
 import { cores } from '../styles/cores'
 
-const Etapas = ({navigation}) => {
+const InfoAgro = ({navigation}) => {
     const [isLoading,setIsLoading] = useState(false);
 
   return (
      <View style={styles.container}>
         <StatusBar animated={true} backgroundColor={'#fff'} barStyle="dark-content"/>
          <Botao 
-            onPress={()=>navigation.navigate('form1')} 
-            text={'Dados do Cooperado'} 
+            onPress={()=>navigation.navigate('caprinos')} 
+            text={'Rebanho de Caprinos'} 
             textSize={16} 
             textColor={cores.white} 
             width={'100%'} 
@@ -23,8 +23,8 @@ const Etapas = ({navigation}) => {
         />
         <HeightSpacer h={20}/>
         <Botao 
-            onPress={()=>navigation.navigate('form2')} 
-            text={'Dados da Propriedade'} 
+            onPress={()=>navigation.navigate('ovinos')} 
+            text={'Rebanho de Ovinos'} 
             textSize={16} 
             textColor={cores.white} 
             width={'100%'} 
@@ -35,8 +35,8 @@ const Etapas = ({navigation}) => {
         />
         <HeightSpacer h={20}/>
         <Botao 
-            onPress={()=>navigation.navigate('form3')} 
-            text={'Carecterísticas da Propriedade'} 
+            onPress={()=>navigation.navigate('producaoAnual')} 
+            text={'Boletim de Produção Anual'} 
             textSize={16} 
             textColor={cores.white} 
             width={'100%'} 
@@ -47,8 +47,32 @@ const Etapas = ({navigation}) => {
         />
          <HeightSpacer h={20}/>
         <Botao 
-            onPress={()=>navigation.navigate('infoAgro')} 
-            text={'Informações Agropecuárias'} 
+            onPress={()=>{}} 
+            text={'Ocorrência de Doenças'} 
+            textSize={16} 
+            textColor={cores.white} 
+            width={'100%'} 
+            backgroundColor={cores.primary} 
+            borderWidth={0} 
+            borderRadius={10} 
+            isLoading={isLoading}
+        />
+         <HeightSpacer h={20}/>
+        <Botao 
+            onPress={()=>{}} 
+            text={'Uso de Insumos, silagem e fertilizantes'} 
+            textSize={16} 
+            textColor={cores.white} 
+            width={'100%'} 
+            backgroundColor={cores.primary} 
+            borderWidth={0} 
+            borderRadius={10} 
+            isLoading={isLoading}
+        />
+         <HeightSpacer h={20}/>
+        <Botao 
+            onPress={()=>navigation.navigate('demais')} 
+            text={'Demais produção agropecuária'} 
             textSize={16} 
             textColor={cores.white} 
             width={'100%'} 
@@ -61,14 +85,13 @@ const Etapas = ({navigation}) => {
   )
 }
 
-export default Etapas
+export default InfoAgro
 
 const styles = StyleSheet.create({
   container:{
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
-  
     paddingHorizontal:20
   }
 })

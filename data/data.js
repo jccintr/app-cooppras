@@ -8,6 +8,7 @@ export const naturezaOcupacao = [
   'Uso Coletivo',
   'Outros'
 ];
+export const voltagens = ['127V','220V'];
 export const cidades = [
     "Acauã", "Agricolândia", "Água Branca", "Alagoinha do Piauí", "Alegrete do Piauí",
     "Alto Longá", "Altos", "Alvorada do Gurguéia", "Amarante", "Angical do Piauí",

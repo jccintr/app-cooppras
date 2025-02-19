@@ -1,8 +1,7 @@
 import { StyleSheet, Text, SafeAreaView,StatusBar,View, KeyboardAvoidingView,Platform, ScrollView } from 'react-native'
 import React, {useState,useEffect} from 'react'
-import InputField from '../components/InputField'
 import SelectInput from '../components/SelectInput';
-import { cidades } from '../data/data';
+import { cidades,naturezaOcupacao } from '../data/data';
 import MyInput from '../components/MyInput';
 import FormInput from '../components/FormInput';
   
@@ -25,7 +24,9 @@ const Form2 = () => {
     const [coordGeo,setCoordGeo] = useState('');
     const [municipio,setMunicipio] = useState('');
     const [cep,setCep] = useState('');
-    const [nome,setNome] = useState('');
+    const [natOcupacao,setNatOcupacao] = useState('');
+    const [incra,setIncra] = useState('');
+    const [nirf,setNirf] = useState('');
 
 useEffect(() => {
   setCep(insertCepMask(cep));
@@ -45,8 +46,9 @@ useEffect(() => {
                 <FormInput  label={'Coordenadas geográficas:'}  value={coordGeo} onChangeText={t=>setCoordGeo(t)} placeholder={'Informe a latitude e longitude do imóvel'}/>
                 <SelectInput label={'Município:'} placeholder={'Selecione o Município'} modalTitle={'Selecione o Município'} options={cidades} onChangeSelect={setMunicipio}/>
                 <FormInput keyboardType='number-pad' label={'CEP:'} value={cep} onChangeText={t=>setCep(t)} placeholder="Informe o CEP do imóvel"/>
-             
-           
+                <SelectInput label={'Natureza da Ocupação:'} placeholder={'Selecione a natureza da ocupação'} modalTitle={'Selecione a natureza da ocupação'} options={naturezaOcupacao} onChangeSelect={setNatOcupacao}/>
+                <FormInput label={'INCRA Nº:'} value={incra} onChangeText={t=>setIncra(t)}placeholder={'Informe o núemro do INCRA'} keyboardType={'number-pad'}/>
+                <FormInput label={'NIRF Nº:'} value={nirf} onChangeText={t=>setNirf(t)}placeholder={'Informe o número do NIRF'} keyboardType={'number-pad'}/>
             </ScrollView>
         </SafeAreaView>
     </KeyboardAvoidingView>
