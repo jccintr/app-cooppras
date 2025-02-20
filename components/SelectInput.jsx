@@ -7,9 +7,9 @@ import { cores } from '../styles/cores';
 
 
 
-const SelectInput = ({label,placeholder,modalTitle,options,onChangeSelect}) => {
-   const [title,setTitle] = useState(placeholder);
-   const [selected,setSelected] = useState(0);
+const SelectInput = ({label,placeholder,modalTitle,options,onChangeSelect,value}) => {
+   const [title,setTitle] = useState(value || placeholder);
+   const [selected,setSelected] = useState(value || 0);
    const [modalVisible,setModalVisible] = useState(false);
 
 

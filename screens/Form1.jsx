@@ -1,7 +1,9 @@
-import { StyleSheet, Text, SafeAreaView,StatusBar,View } from 'react-native'
-import React, {useState,useEffect} from 'react'
+import { StyleSheet, Text, SafeAreaView,StatusBar,View,Alert } from 'react-native'
+import React, {useState,useEffect,useContext} from 'react'
 import InputField from '../components/InputField'
 import { cores } from '../styles/cores'
+import { CooperadoContext } from '../contexts/CooperadoContext'
+import Botao from '../components/reusable/Botao'
 
 const insertPhoneMask = (phone) => {
 
@@ -26,10 +28,12 @@ const insertCpfMask = (value) => {
  return value
 }
 
-const Form1 = () => {
-  const [nome,setNome] = useState('');
-  const [cpf,setCpf] = useState('');
-  const [telefone,setTelefone] = useState('');
+const Form1 = ({navigation}) => {
+  const {nomeGlobal,cpfGlobal,telefoneGlobal,setNomeGlobal,setTelefoneGlobal,setCpfGlobal} = useContext(CooperadoContext);
+  const [nome,setNome] = useState(nomeGlobal);
+  const [cpf,setCpf] = useState(cpfGlobal);
+  const [telefone,setTelefone] = useState(telefoneGlobal);
+  
 
 
   useEffect(() => {
@@ -41,6 +45,25 @@ const Form1 = () => {
 }, [cpf]);
 
 
+const saveData = () => {
+
+  if(nome.trim().length===0){
+    Alert.alert("Erro", "Informe o nome por favor.");
+    return
+  }
+  if(nome.trim().length===0){
+    Alert.alert("Erro", "Informe o cpf por favor.");
+    return
+  }
+  if(nome.trim().length===0){
+    Alert.alert("Erro", "Informe o telefone por favor.");
+    return
+  }
+  setNomeGlobal(nome);
+  setCpfGlobal(cpf);
+  setTelefoneGlobal(telefone);
+  navigation.goBack();
+}
 
   return (
     <View style={styles.container}>
@@ -69,6 +92,17 @@ const Form1 = () => {
             password={false} 
             keyboard={'number-pad'}
          />
+         <Botao 
+            onPress={()=>saveData()} 
+            text={'SALVAR'} 
+            textSize={16} 
+            textColor={cores.white} 
+            width={'100%'} 
+            backgroundColor={cores.primary} 
+            borderWidth={0} 
+            borderRadius={10} 
+            isLoading={false}
+        />
     </View>
   )
 }

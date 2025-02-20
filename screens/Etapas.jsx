@@ -57,6 +57,19 @@ const Etapas = ({navigation}) => {
             borderRadius={10} 
             isLoading={isLoading}
         />
+         <HeightSpacer h={20}/>
+        <Botao 
+            onPress={()=>navigation.navigate('infoAgro')} 
+            text={'Gerar PDF'} 
+            textSize={16} 
+            textColor={cores.primary} 
+            width={'100%'} 
+            borderColor={cores.primary}
+            backgroundColor={cores.whiteSmoke} 
+            borderWidth={2} 
+            borderRadius={10} 
+            isLoading={isLoading}
+        />
     </View>
   )
 }
