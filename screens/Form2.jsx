@@ -92,7 +92,7 @@ const saveData = () => {
 
 
   return (
-     <KeyboardAvoidingView  behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{flex:1}}>
+    
         <SafeAreaView style={styles.container}>
             <StatusBar animated={true} backgroundColor={'#fff'} barStyle="dark-content"/>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -120,7 +120,7 @@ const saveData = () => {
                 />
             </ScrollView>
         </SafeAreaView>
-    </KeyboardAvoidingView>
+   
   )
 }
 

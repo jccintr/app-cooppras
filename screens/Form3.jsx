@@ -13,7 +13,7 @@ import { cores } from '../styles/cores';
 const Form3 = ({navigation}) => {
     const {isCarGlobal,setIsCarGlobal,areaTotalConsolidadaGlobal,setAreaTotalConsolidadaGlobal,areaReservaLegalGlobal,setAreaReservaLegalGlobal,areaReconhecidaAppGlobal,setAreaReconhecidaAppGlobal} = useContext(DetalhesContext);
     const {areaLitigioGlobal,setAreaLitigioGlobal,fonteAguaPotavelGlobal,setFonteAguaPotavelGlobal,possuiRioGlobal,setPossuiRioGlobal,possuiRepresaGlobal,setPossuiRepresaGlobal} = useContext(DetalhesContext);
-    const {areaRepresaGlobal,setareaRepresaGlobal,possuiFonteEnergiaGlobal,setPossuiFonteEnergiaGlobal,voltagemGlobal,setVoltagemGlobal,pastagemNativaGlobal,setPastagemNativaGlobal} = useContext(DetalhesContext);
+    const {areaRepresaGlobal,setAreaRepresaGlobal,possuiFonteEnergiaGlobal,setPossuiFonteEnergiaGlobal,voltagemGlobal,setVoltagemGlobal,pastagemNativaGlobal,setPastagemNativaGlobal} = useContext(DetalhesContext);
     const {pastagemCultivadaGlobal,setPastagemCultivadaGlobal,areaPastagemCultivadaGlobal,setAreaPastagemCultivadaGlobal,cercado1AreaGlobal,setCercado1AreaGlobal,cercado1FinalidadeGlobal,setCercado1FinalidadeGlobal} = useContext(DetalhesContext);
     const {cercado2AreaGlobal,setCercado2AreaGlobal,cercado2FinalidadeGlobal,setCercado2FinalidadeGlobal,outrasAreasGlobal,setOutrasAreasGlobal,familiasTrabalhandoGlobal,setFamiliasTrabalhandoGlobal,familiasHabitandoGlobal,setFamiliasHabitandoGlobal} = useContext(DetalhesContext);
     
@@ -75,7 +75,7 @@ const Form3 = ({navigation}) => {
       setFonteAguaPotavelGlobal(fonteAguaPotavel);
       setPossuiRioGlobal(possuiRio);
       setPossuiRepresaGlobal(possuiRepresa);
-      setareaRepresaGlobal(areaRepresa);
+      setAreaRepresaGlobal(areaRepresa);
       setPossuiFonteEnergiaGlobal(possuiFonteEnergia);
       setVoltagemGlobal(voltagem);
       setPastagemNativaGlobal(pastagemNativa);
@@ -96,7 +96,7 @@ const Form3 = ({navigation}) => {
 
 
   return (
-     <KeyboardAvoidingView  behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{flex:1}}>
+    
         <SafeAreaView style={styles.container}>
             <StatusBar animated={true} backgroundColor={'#fff'} barStyle="dark-content"/>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -117,7 +117,7 @@ const Form3 = ({navigation}) => {
             <FormInput label={'Pastagem nativa predominante:'} value={pastagemNativa} onChangeText={t=>setPastagemNativa(t)} placeholder="Informe o tipo de pastagem predominante"/>
             
             <FormInput label={'Pastagem cultivada:'} value={pastagemCultivada} onChangeText={t=>setPastagemCultivada(t)} placeholder="Informe o tipo de pastagem cultivada"/>
-            <FormInput label={'Área Pastagem cultivada:'} keyboardType={'number-pad'} value={pastagemCultivada} onChangeText={t=>setPastagemCultivada(t)} placeholder="Informe o tipo de pastagem cultivada"/>
+            <FormInput label={'Área Pastagem cultivada:'} keyboardType={'number-pad'} value={areaPastagemCultivada} onChangeText={t=>setAreaPastagemCultivada(t)} placeholder="Informe a área da pastagem cultivada"/>
             <Text style={{fontSize:16,fontWeight:'bold',textAlign:'center'}}>Cercado 1</Text>
             <FormInput label={'Área:'} value={cercado1Area} onChangeText={t=>setCercado1Area(t)} placeholder="Informe a área do cercado 1" keyboardType={'number-pad'}/>
             <FormInput label={'Finalidade:'} value={cercado1Finalidade} onChangeText={t=>setCercado1Finalidade(t)} placeholder="Informe a finalidade do cercado 1"/>
@@ -141,7 +141,7 @@ const Form3 = ({navigation}) => {
                 />
             </ScrollView>
         </SafeAreaView>
-    </KeyboardAvoidingView>
+    
   )
 }
 
