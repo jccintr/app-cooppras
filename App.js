@@ -4,6 +4,7 @@ import StackNavigator from './navigation/StackNavigator';
 import { CooperadoContext } from './contexts/CooperadoContext';
 import { DadosContext } from './contexts/DadosContext';
 import { DetalhesContext } from './contexts/DetalhesContext';
+import { TableContext } from './contexts/TableContext';
 
 export default function App() {
    const [nomeGlobal,setNomeGlobal] = useState('');
@@ -42,14 +43,31 @@ export default function App() {
   const [outrasAreasGlobal,setOutrasAreasGlobal] = useState('');
   const [familiasTrabalhandoGlobal,setFamiliasTrabalhandoGlobal] = useState('');
   const [familiasHabitandoGlobal,setFamiliasHabitandoGlobal] = useState('');
-
+  const [caprinosGlobal,setCaprinosGlobal] = useState([
+    {quant:'',peso:'',valor:''},
+    {quant:'',peso:'',valor:''},
+    {quant:'',peso:'',valor:''},
+    {quant:'',peso:'',valor:''},
+    {quant:'',peso:'',valor:''},
+    {quant:'',peso:'',valor:''}
+  ]);
+  const [ovinosGlobal,setOvinosGlobal] = useState([
+    {quant:'',peso:'',valor:''},
+    {quant:'',peso:'',valor:''},
+    {quant:'',peso:'',valor:''},
+    {quant:'',peso:'',valor:''},
+    {quant:'',peso:'',valor:''},
+    {quant:'',peso:'',valor:''}
+  ]);
   return (
    <CooperadoContext.Provider value={{nomeGlobal,setNomeGlobal,cpfGlobal,setCpfGlobal,telefoneGlobal,setTelefoneGlobal}}>
     <DadosContext.Provider value={{nomeImovelGlobal,setNomeImovelGlobal,areaTotalClobal,setAreaTotalGlobal,regiaoGlobal,setRegiaoGlobal,distanciaSedeGlobal,setDistanciaSedeGlobal,coordGeoGlobal,setCoordGeoGlobal,municipioGlobal,setMunicipioGlobal,cepGlobal,setCepGlobal,natOcupacaoGlobal,setNatOcupacaoGlobal,incraGlobal,setIncraGlobal,nirfGlobal,setNirfGlobal}}>
       <DetalhesContext.Provider value={{isCarGlobal,setIsCarGlobal,areaTotalConsolidadaGlobal,setAreaTotalConsolidadaGlobal,areaReservaLegalGlobal,setAreaReservaLegalGlobal,areaReconhecidaAppGlobal,setAreaReconhecidaAppGlobal,areaLitigioGlobal,setAreaLitigioGlobal,fonteAguaPotavelGlobal,setFonteAguaPotavelGlobal,possuiRioGlobal,setPossuiRioGlobal,possuiRepresaGlobal,setPossuiRepresaGlobal,areaRepresaGlobal,setAreaRepresaGlobal,possuiFonteEnergiaGlobal,setPossuiFonteEnergiaGlobal,voltagemGlobal,setVoltagemGlobal,pastagemNativaGlobal,setPastagemNativaGlobal,pastagemCultivadaGlobal,setPastagemCultivadaGlobal,areaPastagemCultivadaGlobal,setAreaPastagemCultivadaGlobal,cercado1AreaGlobal,setCercado1AreaGlobal,cercado1FinalidadeGlobal,setCercado1FinalidadeGlobal,cercado2AreaGlobal,setCercado2AreaGlobal,cercado2FinalidadeGlobal,setCercado2FinalidadeGlobal,outrasAreasGlobal,setOutrasAreasGlobal,familiasTrabalhandoGlobal,setFamiliasTrabalhandoGlobal,familiasHabitandoGlobal,setFamiliasHabitandoGlobal}}>
+      <TableContext.Provider value={{caprinosGlobal,setCaprinosGlobal,ovinosGlobal,setOvinosGlobal}}>
       <NavigationContainer>
           <StackNavigator/>
       </NavigationContainer>
+      </TableContext.Provider>
       </DetalhesContext.Provider>
       </DadosContext.Provider>
     </CooperadoContext.Provider>

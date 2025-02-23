@@ -6,10 +6,13 @@ import { cores } from '../styles/cores';
 import { printToFileAsync } from 'expo-print';
 import { shareAsync } from 'expo-sharing';
 import * as FileSystem from 'expo-file-system';
-import { htmlHeader,htmlFooter, htmlCooperado, htmlDadosPropriedade, htmlDetalhesPropriedade } from '../util/html';
+import { htmlTopo,htmlFooter, htmlCooperado, htmlDadosPropriedade, htmlDetalhesPropriedade,htmlDetalhesPropriedade2, htmlDocTitle, htmlPageHeader, htmlRebanhoCaprinos, htmlRebanhoOvinos, htmlBoletimProdudaoAnual } from '../util/html';
 import { CooperadoContext } from '../contexts/CooperadoContext';
 import { DadosContext } from '../contexts/DadosContext';
 import { DetalhesContext } from '../contexts/DetalhesContext';
+import { TableContext } from '../contexts/TableContext';
+import { manipulateAsync } from 'expo-image-manipulator';
+import { Asset } from 'expo-asset';
 
 
 const Etapas = ({navigation}) => {
@@ -25,22 +28,36 @@ const Etapas = ({navigation}) => {
     const {pastagemCultivadaGlobal,areaPastagemCultivadaGlobal,cercado1AreaGlobal,cercado1FinalidadeGlobal} = useContext(DetalhesContext);
     const {cercado2AreaGlobal,cercado2FinalidadeGlobal,outrasAreasGlobal,familiasTrabalhandoGlobal,familiasHabitandoGlobal} = useContext(DetalhesContext);
         
-    
-    const [isLoading,setIsLoading] = useState(false);
+    const {caprinosGlobal,ovinosGlobal} = useContext(TableContext);
 
+    const [isLoading,setIsLoading] = useState(false);
+   
 
 
 const criaPdf = async () => {
-  let htmlContent = htmlHeader() + htmlFooter() + htmlCooperado(nomeGlobal,cpfGlobal,telefoneGlobal);// + htmlDadosPropriedade(nomeImovelGlobal,areaTotalClobal,regiaoGlobal,distanciaSedeGlobal,coordGeoGlobal,municipioGlobal,cepGlobal,natOcupacaoGlobal,incraGlobal,nirfGlobal);
+  const asset = Asset.fromModule(require('../assets/logo-pdf.png'));
+  const image = await manipulateAsync(asset.localUri ?? asset.uri, [], { base64: true });
+
+  let htmlContent = htmlTopo();
+  htmlContent += htmlPageHeader(image,"1");
+  htmlContent += htmlDocTitle();
+  htmlContent += htmlCooperado(nomeGlobal,cpfGlobal,telefoneGlobal);
   htmlContent += htmlDadosPropriedade(nomeImovelGlobal,areaTotalClobal,regiaoGlobal,distanciaSedeGlobal,coordGeoGlobal,municipioGlobal,cepGlobal,natOcupacaoGlobal,incraGlobal,nirfGlobal);
+  //htmlContent += htmlPageHeader(image,"2");
   htmlContent += htmlDetalhesPropriedade(isCarGlobal,areaTotalConsolidadaGlobal,areaReservaLegalGlobal,areaReconhecidaAppGlobal,
     areaLitigioGlobal,fonteAguaPotavelGlobal,possuiRioGlobal,possuiRepresaGlobal,
-    areaRepresaGlobal,possuiFonteEnergiaGlobal,voltagemGlobal,pastagemNativaGlobal,
-    pastagemCultivadaGlobal,areaPastagemCultivadaGlobal,cercado1AreaGlobal,cercado1FinalidadeGlobal,
-    cercado2AreaGlobal,cercado2FinalidadeGlobal,outrasAreasGlobal,familiasTrabalhandoGlobal,familiasHabitandoGlobal);
+    areaRepresaGlobal,possuiFonteEnergiaGlobal,voltagemGlobal);
+    htmlContent += htmlPageHeader(image,"2");
+    htmlContent += htmlDetalhesPropriedade2(pastagemNativaGlobal,pastagemCultivadaGlobal,areaPastagemCultivadaGlobal,cercado1AreaGlobal,cercado1FinalidadeGlobal,
+      cercado2AreaGlobal,cercado2FinalidadeGlobal,outrasAreasGlobal,familiasTrabalhandoGlobal,familiasHabitandoGlobal);
+  htmlContent += htmlRebanhoCaprinos(caprinosGlobal);
+  htmlContent += htmlRebanhoOvinos(ovinosGlobal);
+  htmlContent += htmlPageHeader(image,"3");
+  htmlContent += htmlBoletimProdudaoAnual();
+  htmlContent += htmlFooter();
   const fileName = 'coopprass.pdf';
      const file = await printToFileAsync({html:htmlContent,base64:false,width:595,height:842});
-     console.log('Paginas: '+file.numberOfPages);
+     
     // await shareAsync(file.uri);
     save(file.uri,fileName,'application/pdf');
 }
