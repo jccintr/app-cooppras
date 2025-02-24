@@ -19,5 +19,9 @@ export const cores = {
     searchIconColor: '#5b5b5b',
     purple: 'purple',
     stars: '#f8af08',
+    jetBlack:'#343434',
+    onyxBlack:'#353935',
+    ashGray: '#B2BEB5',
+    blueGray:'#7393B3',
     whats: '#008000'
  };

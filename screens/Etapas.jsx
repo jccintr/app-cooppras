@@ -6,7 +6,7 @@ import { cores } from '../styles/cores';
 import { printToFileAsync } from 'expo-print';
 import { shareAsync } from 'expo-sharing';
 import * as FileSystem from 'expo-file-system';
-import { htmlTopo,htmlFooter, htmlCooperado, htmlDadosPropriedade, htmlDetalhesPropriedade,htmlDetalhesPropriedade2, htmlDocTitle, htmlPageHeader, htmlRebanhoCaprinos, htmlRebanhoOvinos, htmlBoletimProdudaoAnual } from '../util/html';
+import { htmlTopo,htmlFooter, htmlCooperado, htmlDadosPropriedade, htmlDetalhesPropriedade,htmlDetalhesPropriedade2, htmlDocTitle, htmlPageHeader, htmlRebanhoCaprinos, htmlRebanhoOvinos, htmlBoletimProdudaoAnual, htmlDemaisProducao } from '../util/html';
 import { CooperadoContext } from '../contexts/CooperadoContext';
 import { DadosContext } from '../contexts/DadosContext';
 import { DetalhesContext } from '../contexts/DetalhesContext';
@@ -28,7 +28,7 @@ const Etapas = ({navigation}) => {
     const {pastagemCultivadaGlobal,areaPastagemCultivadaGlobal,cercado1AreaGlobal,cercado1FinalidadeGlobal} = useContext(DetalhesContext);
     const {cercado2AreaGlobal,cercado2FinalidadeGlobal,outrasAreasGlobal,familiasTrabalhandoGlobal,familiasHabitandoGlobal} = useContext(DetalhesContext);
         
-    const {caprinosGlobal,ovinosGlobal} = useContext(TableContext);
+    const {caprinosGlobal,ovinosGlobal,producaoAnualGlobal,demaisProducaoGlobal} = useContext(TableContext);
 
     const [isLoading,setIsLoading] = useState(false);
    
@@ -53,9 +53,10 @@ const criaPdf = async () => {
   htmlContent += htmlRebanhoCaprinos(caprinosGlobal);
   htmlContent += htmlRebanhoOvinos(ovinosGlobal);
   htmlContent += htmlPageHeader(image,"3");
-  htmlContent += htmlBoletimProdudaoAnual();
+  htmlContent += htmlBoletimProdudaoAnual(producaoAnualGlobal);
+  htmlContent += htmlDemaisProducao(demaisProducaoGlobal);
   htmlContent += htmlFooter();
-  const fileName = 'coopprass.pdf';
+  const fileName = 'formulario-agropecuario.pdf';
      const file = await printToFileAsync({html:htmlContent,base64:false,width:595,height:842});
      
     // await shareAsync(file.uri);

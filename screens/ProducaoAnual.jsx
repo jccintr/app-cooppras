@@ -1,16 +1,26 @@
 import { StyleSheet, View } from 'react-native'
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import TableRowInput from '../components/TableRowInput'
 import TableHeader from '../components/TableHeader'
 import HeightSpacer from '../components/reusable/HeightSpacer'
+import Botao from '../components/reusable/Botao'
+import { cores } from '../styles/cores'
+import { TableContext } from '../contexts/TableContext'
 
-const ProducaoAnual = () => {
-    const [natalidade,setNatalidade] = useState({quant:'',peso:'',valor:''})
-      const [mortalidade,setMortalidade] = useState({quant:'',peso:'',valor:''})
-      const [abate,setAbate] = useState({quant:'',peso:'',valor:''})
-      const [roubo,setRoubo] = useState({quant:'',peso:'',valor:''})
-      const [mortalidadeAcidente,setMortalidadeAcidente] = useState({quant:'',peso:'',valor:''})
-      const [mortalidadeIntoxicacao,setMortalidadeIntoxicacao] = useState({quant:'',peso:'',valor:''})
+const ProducaoAnual = ({navigation}) => {
+     const {producaoAnualGlobal,setProducaoAnualGlobal} = useContext(TableContext);
+    const [natalidade,setNatalidade] = useState(producaoAnualGlobal[0])
+      const [mortalidade,setMortalidade] = useState(producaoAnualGlobal[1])
+      const [abate,setAbate] = useState(producaoAnualGlobal[2])
+      const [roubo,setRoubo] = useState(producaoAnualGlobal[3])
+      const [mortalidadeAcidente,setMortalidadeAcidente] = useState(producaoAnualGlobal[4])
+      const [mortalidadeIntoxicacao,setMortalidadeIntoxicacao] = useState(producaoAnualGlobal[5])
+
+      const saveData = () => {
+        const newProducaoAnual = [natalidade,mortalidade,abate,roubo,mortalidadeAcidente,mortalidadeIntoxicacao];
+        setProducaoAnualGlobal(newProducaoAnual);
+        navigation.goBack();
+    }
 
   return (
     <View style={styles.container}>
@@ -27,6 +37,18 @@ const ProducaoAnual = () => {
        <TableRowInput descricao="Mortalidade por acidente ou predador" data={mortalidadeAcidente} setData={setMortalidadeAcidente}/>
        <HeightSpacer h={10}/>
        <TableRowInput descricao="Mortalidade por intoxicação natural" data={mortalidadeIntoxicacao} setData={setMortalidadeIntoxicacao}/>
+       <HeightSpacer h={20}/>
+       <Botao 
+            onPress={()=>saveData()} 
+            text={'SALVAR'} 
+            textSize={16} 
+            textColor={cores.white} 
+            width={'100%'} 
+            backgroundColor={cores.primary} 
+            borderWidth={0} 
+            borderRadius={10} 
+            isLoading={false}
+                />
     </View>
   )
 }

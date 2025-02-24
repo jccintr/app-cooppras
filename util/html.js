@@ -221,15 +221,15 @@ export const htmlRebanhoOvinos = (ovinosGlobal) => {
     </tbody>
    
 </table>
-<p></>
+<p></p>
 
   `
 
   return html;
 }
 
-export const htmlBoletimProdudaoAnual = () => {
-
+export const htmlBoletimProdudaoAnual = (producaoAnualGlobal) => {
+  const label = ['Média de natalidade','Média de mortalidade','Média de Abate','Média de roubo ou furto','Mortalidade por acidente ou predador','Mortalidade por intoxicação natural'];
   let html = `
    <h4>BOLETIM DE PRODUÇÃO ANUAL</h4>
     <table>
@@ -241,56 +241,79 @@ export const htmlBoletimProdudaoAnual = () => {
             <th>Valor</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody>`
+    let quantTotal = 0, pesoTotal = 0, valorTotal = 0;
+    for(let i=0;i<producaoAnualGlobal.length;i++){
+      quantTotal += parseInt(producaoAnualGlobal[i].quant);
+      pesoTotal += parseFloat(producaoAnualGlobal[i].peso);
+      valorTotal += parseFloat(producaoAnualGlobal[i].valor);
+      html += `
         <tr>
-            <td width="20%" class="tdLeft">Média de natalidade</td>
-            <td width="20%">32</td>
-            <td width="20%">325</td>
-            <td width="20%">2563.24</td>
+            <td width="20%" class="tdLeft">${label[i]}</td>
+            <td width="20%">${producaoAnualGlobal[i].quant}</td>
+            <td width="20%">${producaoAnualGlobal[i].peso}</td>
+            <td width="20%">${parseFloat(producaoAnualGlobal[i].valor).toFixed(2)}</td>
         </tr>
-        <tr>
-            <td td width="20%" class="tdLeft">Média de mortalidade</td>
-            <td width="20%">32</td>
-            <td width="20%">325</td>
-            <td width="20%">2563.24</td>
-        </tr>
-        <tr>
-            <td td width="20%" class="tdLeft">Média de Abate</td>
-            <td width="20%">32</td>
-            <td width="20%">325</td>
-            <td width="20%">2563.24</td>
-        </tr>
-        <tr>
-            <td td width="20%" class="tdLeft">Média de roubo/furto</td>
-            <td width="20%">32</td>
-            <td width="20%">325</td>
-            <td width="20%">2563.24</td>
-        </tr>
-        <tr>
-            <td td width="20%" class="tdLeft">Mortalidade por acidente/predação</td>
-            <td width="20%">32</td>
-            <td width="20%">325</td>
-            <td width="20%">2563.24</td>
-        </tr>
-        <tr>
-            <td td width="20%" class="tdLeft">Mortalidade por intoxicação natural</td>
-            <td width="20%">32</td>
-            <td width="20%">325</td>
-            <td width="20%">2563.24</td>
-        </tr>
-        <tfoot>
-            <tr>
-              <td>Total:</td>
-              <td>328</td>
-              <td>362 </td>
-              <td>23652.54 </td>
-            </tr>
-        </tfoot>
-    </tbody>
-   
+      `
+    }
+    html +=`<tfoot>
+    <tr>
+      <td>Totais:</td>
+      <td>${quantTotal}</td>
+      <td>${pesoTotal}</td>
+      <td>${valorTotal.toFixed(2)}</td>
+    </tr>
+</tfoot>
+</tbody>
+
 </table>
- 
-  `
+
+`
+
+  return html;
+}
+
+export const htmlDemaisProducao = (demaisProducaoGlobal) => {
+  const label = ['Bovinos','Suinos','Aves','Piscicultura','Apicultura (Apiário / Enxames)','Apicultura (Produção de mel)'];
+  let html = `
+   <h4>DEMAIS PRODUÇÃO AGROPECUÁRIA</h4>
+    <table>
+    <thead>
+        <tr>
+            <th>Descrição</th>
+            <th>Quant</th>
+            <th>Peso (kg)</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tbody>`
+    let quantTotal = 0, pesoTotal = 0, valorTotal = 0;
+    for(let i=0;i<demaisProducaoGlobal.length;i++){
+      quantTotal += parseInt(demaisProducaoGlobal[i].quant);
+      pesoTotal += parseFloat(demaisProducaoGlobal[i].peso);
+      valorTotal += parseFloat(demaisProducaoGlobal[i].valor);
+      html += `
+        <tr>
+            <td width="20%" class="tdLeft">${label[i]}</td>
+            <td width="20%">${demaisProducaoGlobal[i].quant}</td>
+            <td width="20%">${demaisProducaoGlobal[i].peso}</td>
+            <td width="20%">${parseFloat(demaisProducaoGlobal[i].valor).toFixed(2)}</td>
+        </tr>
+      `
+    }
+    html +=`<tfoot>
+    <tr>
+      <td>Totais:</td>
+      <td>${quantTotal}</td>
+      <td>${pesoTotal}</td>
+      <td>${valorTotal.toFixed(2)}</td>
+    </tr>
+</tfoot>
+</tbody>
+
+</table>
+
+`
 
   return html;
 }

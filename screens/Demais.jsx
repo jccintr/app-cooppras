@@ -1,35 +1,56 @@
 import { StyleSheet, View } from 'react-native'
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import TableRowInput from '../components/TableRowInput'
 import TableHeader from '../components/TableHeader'
 import HeightSpacer from '../components/reusable/HeightSpacer'
+import Botao from '../components/reusable/Botao'
+import { cores } from '../styles/cores'
+import { TableContext } from '../contexts/TableContext'
 
 
-
-const Demais = () => {
-  const [bovino,setBovino] = useState({quant:'',peso:'',valor:''})
-  const [suino,setSuino] = useState({quant:'',peso:'',valor:''})
-  const [aves,setAves] = useState({quant:'',peso:'',valor:''})
-  const [piscicultura,setPiscicultura] = useState({quant:'',peso:'',valor:''})
-  const [apicultura,setApicultura] = useState({quant:'',peso:'',valor:''})
-  const [apiculturaProducao,setApiculturaProducao] = useState({quant:'',peso:'',valor:''})
+const Demais = ({navigation}) => {
+  const {demaisProducaoGlobal,setDemaisProducaoGlobal} = useContext(TableContext);
+  const [bovinos,setBovinos] = useState(demaisProducaoGlobal[0])
+  const [suinos,setSuinos] = useState(demaisProducaoGlobal[1])
+  const [aves,setAves] = useState(demaisProducaoGlobal[2])
+  const [piscicultura,setPiscicultura] = useState(demaisProducaoGlobal[3])
+  const [apicultura,setApicultura] = useState(demaisProducaoGlobal[4])
+  const [apiculturaProducao,setApiculturaProducao] = useState(demaisProducaoGlobal[5])
  
+
+  const saveData = () => {
+    const newDemaisProducao = [bovinos,suinos,aves,piscicultura,apicultura,apiculturaProducao];
+    setDemaisProducaoGlobal(newDemaisProducao);
+    navigation.goBack();
+}
 
   return (
     <View style={styles.container}>
        <TableHeader/>
        <HeightSpacer h={10}/>
-       <TableRowInput descricao="Bovino" data={bovino} setData={setBovino}/>
+       <TableRowInput descricao="Bovinos" data={bovinos} setData={setBovinos}/>
        <HeightSpacer h={10}/>
-       <TableRowInput descricao="Suino" data={suino} setData={setSuino}/>
+       <TableRowInput descricao="Suinos" data={suinos} setData={setSuinos}/>
        <HeightSpacer h={10}/>
        <TableRowInput descricao="Aves" data={aves} setData={setAves}/>
        <HeightSpacer h={10}/>
-       <TableRowInput descricao="Piscicultura" data={piscicultura} setData={setApicultura}/>
+       <TableRowInput descricao="Piscicultura" data={piscicultura} setData={setPiscicultura}/>
        <HeightSpacer h={10}/>
        <TableRowInput descricao="Apicultura (Apiário / Enxames)" data={apicultura} setData={setApicultura}/>
        <HeightSpacer h={10}/>
        <TableRowInput descricao="Apicultura (Produção de mel)" data={apiculturaProducao} setData={setApiculturaProducao}/>
+       <HeightSpacer h={20}/>
+       <Botao 
+            onPress={()=>saveData()} 
+            text={'SALVAR'} 
+            textSize={16} 
+            textColor={cores.white} 
+            width={'100%'} 
+            backgroundColor={cores.primary} 
+            borderWidth={0} 
+            borderRadius={10} 
+            isLoading={false}
+                />
     </View>
   )
 }
