@@ -77,10 +77,10 @@ export default function App() {
     {quant:'',peso:'',valor:''}
   ]);
   const [doencas,setDoencas] = useState([
-    {id:1,tipo:'Gripe Aviária'},
-    {id:2,tipo:'Doença da Vaca Louca'},
-    {id:3,tipo:'Gripe Suina'},
-    {id:4,tipo:'Covid 19'},
+    {id:1,tipo:'Gripe Aviária',perido:'',tratamento:'',medicacao:''},
+    {id:2,tipo:'Doença da Vaca Louca',perido:'',tratamento:'',medicacao:''},
+    {id:3,tipo:'Gripe Suina',perido:'',tratamento:'',medicacao:''},
+    {id:4,tipo:'Covid 19',perido:'',tratamento:'',medicacao:''},
   ]);
   return (
    <CooperadoContext.Provider value={{nomeGlobal,setNomeGlobal,cpfGlobal,setCpfGlobal,telefoneGlobal,setTelefoneGlobal}}>
