@@ -6,11 +6,12 @@ import { cores } from '../styles/cores';
 import { printToFileAsync } from 'expo-print';
 import { shareAsync } from 'expo-sharing';
 import * as FileSystem from 'expo-file-system';
-import { htmlTopo,htmlFooter, htmlCooperado, htmlDadosPropriedade, htmlDetalhesPropriedade,htmlDetalhesPropriedade2, htmlDocTitle, htmlPageHeader, htmlRebanhoCaprinos, htmlRebanhoOvinos, htmlBoletimProdudaoAnual, htmlDemaisProducao } from '../util/html';
+import { htmlTopo,htmlFooter, htmlCooperado, htmlDadosPropriedade, htmlDetalhesPropriedade,htmlDetalhesPropriedade2, htmlDocTitle, htmlPageHeader, htmlRebanhoCaprinos, htmlRebanhoOvinos, htmlBoletimProdudaoAnual, htmlDemaisProducao, htmlDoencas, htmlInsumos, htmlLocal } from '../util/html';
 import { CooperadoContext } from '../contexts/CooperadoContext';
 import { DadosContext } from '../contexts/DadosContext';
 import { DetalhesContext } from '../contexts/DetalhesContext';
 import { TableContext } from '../contexts/TableContext';
+import { LocalContext } from '../contexts/LocalContext';
 import { manipulateAsync } from 'expo-image-manipulator';
 import { Asset } from 'expo-asset';
 
@@ -28,11 +29,11 @@ const Etapas = ({navigation}) => {
     const {pastagemCultivadaGlobal,areaPastagemCultivadaGlobal,cercado1AreaGlobal,cercado1FinalidadeGlobal} = useContext(DetalhesContext);
     const {cercado2AreaGlobal,cercado2FinalidadeGlobal,outrasAreasGlobal,familiasTrabalhandoGlobal,familiasHabitandoGlobal} = useContext(DetalhesContext);
         
-    const {caprinosGlobal,ovinosGlobal,producaoAnualGlobal,demaisProducaoGlobal} = useContext(TableContext);
+    const {caprinosGlobal,ovinosGlobal,producaoAnualGlobal,demaisProducaoGlobal,doencas,insumos} = useContext(TableContext);
+    const {dataVisitaGlobal,localGlobal,tecnicoGlobal,anotacoesGlobal} = useContext(LocalContext);
 
     const [isLoading,setIsLoading] = useState(false);
    
-
 
 const criaPdf = async () => {
   const asset = Asset.fromModule(require('../assets/logo-pdf.png'));
@@ -55,6 +56,9 @@ const criaPdf = async () => {
   htmlContent += htmlPageHeader(image,"3");
   htmlContent += htmlBoletimProdudaoAnual(producaoAnualGlobal);
   htmlContent += htmlDemaisProducao(demaisProducaoGlobal);
+  htmlContent += htmlDoencas(doencas);
+  htmlContent += htmlInsumos(insumos);
+  htmlContent += htmlLocal(dataVisitaGlobal,localGlobal,tecnicoGlobal,anotacoesGlobal);
   htmlContent += htmlFooter();
   const fileName = 'formulario-agropecuario.pdf';
      const file = await printToFileAsync({html:htmlContent,base64:false,width:595,height:842});
@@ -123,6 +127,30 @@ const save = async (uri, filename, mimetype) => {
         <Botao 
             onPress={()=>navigation.navigate('infoAgro')} 
             text={'Informações Agropecuárias'} 
+            textSize={16} 
+            textColor={cores.white} 
+            width={'100%'} 
+            backgroundColor={cores.primary} 
+            borderWidth={0} 
+            borderRadius={10} 
+            isLoading={isLoading}
+        />
+         <HeightSpacer h={20}/>
+         <Botao 
+            onPress={()=>navigation.navigate('local')} 
+            text={'Local e Data'} 
+            textSize={16} 
+            textColor={cores.white} 
+            width={'100%'} 
+            backgroundColor={cores.primary} 
+            borderWidth={0} 
+            borderRadius={10} 
+            isLoading={isLoading}
+        />
+         <HeightSpacer h={20}/>
+         <Botao 
+            onPress={()=>navigation.navigate('anotacoes')} 
+            text={'Anotações'} 
             textSize={16} 
             textColor={cores.white} 
             width={'100%'} 

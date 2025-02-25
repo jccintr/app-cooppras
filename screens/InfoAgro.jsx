@@ -59,7 +59,7 @@ const InfoAgro = ({navigation}) => {
         />
          <HeightSpacer h={20}/>
         <Botao 
-            onPress={()=>{}} 
+            onPress={()=>navigation.navigate('insumos')}  
             text={'Uso de Insumos, silagem e fertilizantes'} 
             textSize={16} 
             textColor={cores.white} 

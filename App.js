@@ -5,7 +5,7 @@ import { CooperadoContext } from './contexts/CooperadoContext';
 import { DadosContext } from './contexts/DadosContext';
 import { DetalhesContext } from './contexts/DetalhesContext';
 import { TableContext } from './contexts/TableContext';
-import Doencas from './screens/Doencas';
+import { LocalContext } from './contexts/LocalContext';
 
 export default function App() {
    const [nomeGlobal,setNomeGlobal] = useState('');
@@ -78,20 +78,32 @@ export default function App() {
   ]);
   const [doencas,setDoencas] = useState([
     {id:1,tipo:'Gripe Aviária',perido:'',tratamento:'',medicacao:''},
-    {id:2,tipo:'Doença da Vaca Louca',perido:'',tratamento:'',medicacao:''},
-    {id:3,tipo:'Gripe Suina',perido:'',tratamento:'',medicacao:''},
-    {id:4,tipo:'Covid 19',perido:'',tratamento:'',medicacao:''},
+    {id:2,tipo:'Doença da Vaca Louca',periodo:'',tratamento:'',medicacao:''},
+    {id:3,tipo:'Gripe Suina',periodo:'',tratamento:'',medicacao:''},
+    {id:4,tipo:'Covid 19',periodo:'',tratamento:'',medicacao:''},
   ]);
+  const [insumos,setInsumos] = useState([
+    {id:1,tipo:'Farelo de Milho',periodo:'',quant:'',resultado:''},
+    {id:2,tipo:'Sal',periodo:'',quant:'',resultado:''},
+   
+  ]);
+  const [dataVisitaGlobal,setDataVisitaGlobal] = useState('');
+  const [localGlobal,setLocalGlobal] = useState('');
+  const [tecnicoGlobal,setTecnicoGlobal] = useState('');
+  const [anotacoesGlobal,setAnotacoesGlobal] = useState('');
+
   return (
    <CooperadoContext.Provider value={{nomeGlobal,setNomeGlobal,cpfGlobal,setCpfGlobal,telefoneGlobal,setTelefoneGlobal}}>
-    <DadosContext.Provider value={{nomeImovelGlobal,setNomeImovelGlobal,areaTotalClobal,setAreaTotalGlobal,regiaoGlobal,setRegiaoGlobal,distanciaSedeGlobal,setDistanciaSedeGlobal,coordGeoGlobal,setCoordGeoGlobal,municipioGlobal,setMunicipioGlobal,cepGlobal,setCepGlobal,natOcupacaoGlobal,setNatOcupacaoGlobal,incraGlobal,setIncraGlobal,nirfGlobal,setNirfGlobal}}>
-      <DetalhesContext.Provider value={{isCarGlobal,setIsCarGlobal,areaTotalConsolidadaGlobal,setAreaTotalConsolidadaGlobal,areaReservaLegalGlobal,setAreaReservaLegalGlobal,areaReconhecidaAppGlobal,setAreaReconhecidaAppGlobal,areaLitigioGlobal,setAreaLitigioGlobal,fonteAguaPotavelGlobal,setFonteAguaPotavelGlobal,possuiRioGlobal,setPossuiRioGlobal,possuiRepresaGlobal,setPossuiRepresaGlobal,areaRepresaGlobal,setAreaRepresaGlobal,possuiFonteEnergiaGlobal,setPossuiFonteEnergiaGlobal,voltagemGlobal,setVoltagemGlobal,pastagemNativaGlobal,setPastagemNativaGlobal,pastagemCultivadaGlobal,setPastagemCultivadaGlobal,areaPastagemCultivadaGlobal,setAreaPastagemCultivadaGlobal,cercado1AreaGlobal,setCercado1AreaGlobal,cercado1FinalidadeGlobal,setCercado1FinalidadeGlobal,cercado2AreaGlobal,setCercado2AreaGlobal,cercado2FinalidadeGlobal,setCercado2FinalidadeGlobal,outrasAreasGlobal,setOutrasAreasGlobal,familiasTrabalhandoGlobal,setFamiliasTrabalhandoGlobal,familiasHabitandoGlobal,setFamiliasHabitandoGlobal}}>
-      <TableContext.Provider value={{caprinosGlobal,setCaprinosGlobal,ovinosGlobal,setOvinosGlobal,producaoAnualGlobal,setProducaoAnualGlobal,demaisProducaoGlobal,setDemaisProducaoGlobal,doencas,setDoencas}}>
-      <NavigationContainer>
-          <StackNavigator/>
-      </NavigationContainer>
-      </TableContext.Provider>
-      </DetalhesContext.Provider>
+     <DadosContext.Provider value={{nomeImovelGlobal,setNomeImovelGlobal,areaTotalClobal,setAreaTotalGlobal,regiaoGlobal,setRegiaoGlobal,distanciaSedeGlobal,setDistanciaSedeGlobal,coordGeoGlobal,setCoordGeoGlobal,municipioGlobal,setMunicipioGlobal,cepGlobal,setCepGlobal,natOcupacaoGlobal,setNatOcupacaoGlobal,incraGlobal,setIncraGlobal,nirfGlobal,setNirfGlobal}}>
+       <DetalhesContext.Provider value={{isCarGlobal,setIsCarGlobal,areaTotalConsolidadaGlobal,setAreaTotalConsolidadaGlobal,areaReservaLegalGlobal,setAreaReservaLegalGlobal,areaReconhecidaAppGlobal,setAreaReconhecidaAppGlobal,areaLitigioGlobal,setAreaLitigioGlobal,fonteAguaPotavelGlobal,setFonteAguaPotavelGlobal,possuiRioGlobal,setPossuiRioGlobal,possuiRepresaGlobal,setPossuiRepresaGlobal,areaRepresaGlobal,setAreaRepresaGlobal,possuiFonteEnergiaGlobal,setPossuiFonteEnergiaGlobal,voltagemGlobal,setVoltagemGlobal,pastagemNativaGlobal,setPastagemNativaGlobal,pastagemCultivadaGlobal,setPastagemCultivadaGlobal,areaPastagemCultivadaGlobal,setAreaPastagemCultivadaGlobal,cercado1AreaGlobal,setCercado1AreaGlobal,cercado1FinalidadeGlobal,setCercado1FinalidadeGlobal,cercado2AreaGlobal,setCercado2AreaGlobal,cercado2FinalidadeGlobal,setCercado2FinalidadeGlobal,outrasAreasGlobal,setOutrasAreasGlobal,familiasTrabalhandoGlobal,setFamiliasTrabalhandoGlobal,familiasHabitandoGlobal,setFamiliasHabitandoGlobal}}>
+         <TableContext.Provider value={{caprinosGlobal,setCaprinosGlobal,ovinosGlobal,setOvinosGlobal,producaoAnualGlobal,setProducaoAnualGlobal,demaisProducaoGlobal,setDemaisProducaoGlobal,doencas,setDoencas,insumos,setInsumos}}>
+           <LocalContext.Provider value={{dataVisitaGlobal,setDataVisitaGlobal,localGlobal,setLocalGlobal,tecnicoGlobal,setTecnicoGlobal,anotacoesGlobal,setAnotacoesGlobal}}>
+             <NavigationContainer>
+               <StackNavigator/>
+             </NavigationContainer>
+           </LocalContext.Provider>
+         </TableContext.Provider>
+        </DetalhesContext.Provider>
       </DadosContext.Provider>
     </CooperadoContext.Provider>
   );

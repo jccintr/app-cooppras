@@ -26,6 +26,7 @@ export const htmlTopo = () =>{
        h4 {margin-left: 20px;}
        p.label {margin-left:20px;font-weight: bold}
        p span {font-weight: normal}
+       span {margin-left: 20px;}
        .center {text-align: center;}
        table {border:1px solid #b3adad;border-collapse:collapse;padding:5px;margin-left: 40px;}
 	   	table th {border:1px solid #b3adad;padding:5px;background: #f0f0f0;color: #313030;}
@@ -314,6 +315,92 @@ export const htmlDemaisProducao = (demaisProducaoGlobal) => {
 </table>
 
 `
+
+  return html;
+}
+
+export const htmlDoencas = (doencas) => {
+ 
+  let html = `<h4>OCORRÊNCIA DE DOENÇAS</h4>
+  <table>
+    <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>Período</th>
+            <th>Tratamento</th>
+            <th>Medicação</th>
+        </tr>
+    </thead>
+    <tbody>`;
+    
+    for(let i=0;i<doencas.length;i++){
+      html += `
+        <tr>
+            <td width="20%" class="tdLeft">${doencas[i].tipo}</td>
+            <td width="20%" class="tdLeft">${doencas[i].periodo}</td>
+            <td width="20%" class="tdLeft">${doencas[i].tratamento}</td>
+            <td width="20%" class="tdLeft">${doencas[i].medicacao}</td>
+            
+        </tr>
+      `
+    }
+     html +=`
+    </tbody>
+   
+</table>
+<p></p>
+
+  `
+
+  return html;
+}
+
+export const htmlInsumos = (insumos) => {
+ 
+  let html = `<h4>USO DE INSUMOS, SILAGEM E FERTILIZANTES</h4>
+  <table>
+    <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>Período</th>
+            <th>Quantidade (kg)</th>
+            <th>Resultado</th>
+        </tr>
+    </thead>
+    <tbody>`;
+    
+    for(let i=0;i<insumos.length;i++){
+      html += `
+        <tr>
+            <td width="20%" class="tdLeft">${insumos[i].tipo}</td>
+            <td width="20%" class="tdLeft">${insumos[i].periodo}</td>
+            <td width="20%" class="tdLeft">${insumos[i].quant}</td>
+            <td width="20%" class="tdLeft">${insumos[i].resultado}</td>
+            
+        </tr>
+      `
+    }
+     html +=`
+    </tbody>
+   
+</table>
+<p></p>
+
+  `
+
+  return html;
+}
+
+export const htmlLocal = (data,local,tecnico,anotacoes) => {
+
+  const html = `
+<p class="label">Data da Visita: <span>${data}</span></p>
+<p class="label">Local da Visita: <span>${local}</span></p>
+<p class="label">Responsável Técnico: <span>${tecnico}</span></p>
+<p class="label">Anotações:</p>
+<span>${anotacoes}</span>
+
+  `
 
   return html;
 }

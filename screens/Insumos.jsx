@@ -2,71 +2,68 @@ import { StyleSheet, Text, View,TouchableOpacity,FlatList } from 'react-native'
 import React, {createRef,useContext,useState} from 'react'
 import Modal from 'react-native-modalbox';
 import { TableContext } from '../contexts/TableContext'
-import CardDoenca from '../components/cards/CardDoenca'
+import CardInsumo from '../components/cards/CardInsumo'
 import HeightSpacer from '../components/reusable/HeightSpacer'
 import { cores } from '../styles/cores'
 import Botao from '../components/reusable/Botao'
 import InputField from '../components/InputField';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import ListHeader from '../components/ListHeader';
- 
 
+const Insumos = ({navigation}) => {
+     const {insumos,setInsumos} = useContext(TableContext)
+      const modalNewRef = createRef();
+      const modalEditRef = createRef();
+      const [modalNewOpen,setModalNewOpen] = useState(false);
+      const [modalEditOpen,setModalEditOpen] = useState(false);
+      const [tipo,setTipo] = useState('');
+      const [periodo,setPeriodo] = useState('');
+      const [quant,setQuant] = useState('');
+      const [resultado,setResultado] = useState('');
+      const [selectedInsumo,setSelectedInsumo] = useState(null)
 
-const Doencas = ({navigation}) => {
-  const {doencas,setDoencas} = useContext(TableContext)
-  const modalNewRef = createRef();
-  const modalEditRef = createRef();
-  const [modalNewOpen,setModalNewOpen] = useState(false);
-  const [modalEditOpen,setModalEditOpen] = useState(false);
-  const [tipo,setTipo] = useState('');
-  const [periodo,setPeriodo] = useState('');
-  const [tratamento,setTratamento] = useState('');
-  const [medicacao,setMedicacao] = useState('');
-  const [selectedDoenca,setSelectedDoenca] = useState(null)
-
-
-  const onAdd = () => {
-    setSelectedDoenca(null);
-    setTipo('');
-    setPeriodo('');
-    setTratamento('');
-    setMedicacao('');
-    setModalNewOpen(true)
- }
-
- const onEdit = (doenca) =>{
-  setSelectedDoenca(doenca);
-  setTipo(doenca.tipo);
-  setPeriodo(doenca.periodo);
-  setTratamento(doenca.tratamento);
-  setMedicacao(doenca.medicacao)
-  setModalEditOpen(true);
-}
-
- const saveNew = () => {
-    const id = doencas.length > 0 ? doencas.length+1 : 1;
-    const novaDoenca =  { id,tipo,periodo,tratamento,medicacao };
-    const novasDoencas = [...doencas, novaDoenca];
-    setDoencas(novasDoencas);
-    setModalNewOpen(false);
- }
-
- const save = () => {
+      const onAdd = () => {
+        setSelectedInsumo(null);
+        setTipo('');
+        setQuant('');
+        setPeriodo('');
+        setResultado('');
+        setModalNewOpen(true)
+     }
     
-     const edited = {id:selectedDoenca.id,tipo,periodo,tratamento,medicacao};
-     let newDoencas = doencas
-     newDoencas.splice(selectedDoenca.id-1, 1,edited );
-     setDoencas(newDoencas);
-     setModalEditOpen(false);
-
- }
-
- const onDelete = () => {
-
-  const novasDoencas = doencas.filter((item)=> item.id !== selectedDoenca.id);
-  setDoencas(novasDoencas);
-  setModalEditOpen(false);
- }
+     const onEdit = (insumo) =>{
+      setSelectedInsumo(insumo);
+      setTipo(insumo.tipo);
+      setPeriodo(insumo.periodo);
+      setQuant(insumo.quant);
+      setResultado(insumo.resultado);
+      setModalEditOpen(true);
+    }
+    
+     const saveNew = () => {
+        const id = insumos.length > 0 ? insumos.length+1 : 1;
+        const novoInsumo =  { id,tipo,periodo,quant,resultado };
+        const novosInsumos = [...insumos, novoInsumo];
+        setInsumos(novosInsumos);
+        setModalNewOpen(false);
+     }
+    
+     const save = () => {
+        
+         const edited = {id:selectedInsumo.id,tipo,periodo,quant,resultado};
+         let newInsumos = insumos
+         newInsumos.splice(selectedInsumo.id-1, 1,edited );
+         setInsumos(newInsumos);
+         setModalEditOpen(false);
+    
+     }
+    
+     const onDelete = () => {
+    
+      const novosInsumos = insumos.filter((item)=> item.id !== selectedInsumo.id);
+      setInsumos(novosInsumos);
+      setModalEditOpen(false);
+     }
 
   return (
     <View style={styles.container}>
@@ -75,19 +72,19 @@ const Doencas = ({navigation}) => {
         ListHeaderComponent={<ListHeader onPress={onAdd}/>}
         showsVerticalScrollIndicator={false}
         style={{width:'100%'}}
-        data={doencas}
+        data={insumos}
         keyExtractor={(item)=> item.id.toString()}
-        renderItem={({item})=><CardDoenca doenca={item} onPress={onEdit} />}
+        renderItem={({item})=><CardInsumo insumo={item} onPress={onEdit} />}
         ItemSeparatorComponent={<HeightSpacer h={8}/>}
        // ListEmptyComponent={<EmptyList title="No accounts found" mensagem={'Please, create a new account'}/>}
-        contentContainerStyle={doencas.length===0?{flexGrow:1,alignItems:'center',justifyContent:'center'}:''}
+        contentContainerStyle={insumos.length===0?{flexGrow:1,alignItems:'center',justifyContent:'center'}:''}
     />
     <Modal isOpen={modalNewOpen} onClosed={()=>setModalNewOpen(false)} style={styles.modal} backgroundColor={'#ff0'} coverScreen={true} position={"bottom"} ref={modalNewRef}>
-         <Text style={styles.modalTitle}>Nova Doença</Text>
+         <Text style={styles.modalTitle}>Novo Insumo</Text>
          <HeightSpacer h={20}/>
          <InputField 
             label={'Tipo:'} 
-            placeholder={'Informe o tipo da doença'} 
+            placeholder={'Informe o tipo do insumo'} 
             value={tipo} 
             onChangeText={t=>setTipo(t)} 
             password={false} 
@@ -102,18 +99,18 @@ const Doencas = ({navigation}) => {
             keyboard={'default'}
           />
           <InputField 
-            label={'Tratamento:'} 
-            placeholder={'Informe o tratamento da doença'} 
-            value={tratamento} 
-            onChangeText={t=>setTratamento(t)} 
+            label={'Quantidade:'} 
+            placeholder={'Informe a quantidade de insumo'} 
+            value={quant} 
+            onChangeText={t=>setQuant(t)} 
             password={false} 
-            keyboard={'default'}
+            keyboard={'number-pad'}
           />
           <InputField 
-            label={'Medicação:'} 
-            placeholder={'Informe a medicação da doença'} 
-            value={medicacao} 
-            onChangeText={t=>setMedicacao(t)} 
+            label={'Resultado:'} 
+            placeholder={'Informe o resultado'} 
+            value={resultado} 
+            onChangeText={t=>setResultado(t)} 
             password={false} 
             keyboard={'default'}
           />
@@ -130,14 +127,14 @@ const Doencas = ({navigation}) => {
           />
     </Modal>
     <Modal isOpen={modalEditOpen} onClosed={()=>setModalEditOpen(false)} style={styles.modal} backgroundColor={'#ff0'} coverScreen={true} position={"bottom"} ref={modalEditRef}>
-         <Text style={styles.modalTitle}>Editando Doença</Text>
+         <Text style={styles.modalTitle}>Editando Insumo</Text>
          <TouchableOpacity style={styles.deleteBtn} onPress={()=>onDelete()}>
             <FontAwesome name="trash-o" size={24} color={cores.vermelho} />
          </TouchableOpacity>
          <HeightSpacer h={20}/>
          <InputField 
             label={'Tipo:'} 
-            placeholder={'Informe o tipo da doença'} 
+            placeholder={'Informe o tipo do insumo'} 
             value={tipo} 
             onChangeText={t=>setTipo(t)} 
             password={false} 
@@ -152,18 +149,18 @@ const Doencas = ({navigation}) => {
             keyboard={'default'}
           />
           <InputField 
-            label={'Tratamento:'} 
-            placeholder={'Informe o tratamento da doença'} 
-            value={tratamento} 
-            onChangeText={t=>setTratamento(t)} 
+            label={'Quantidade:'} 
+            placeholder={'Informe a quantidade de insumo'} 
+            value={quant} 
+            onChangeText={t=>setQuant(t)} 
             password={false} 
-            keyboard={'default'}
+            keyboard={'number-pad'}
           />
           <InputField 
-            label={'Medicação:'} 
-            placeholder={'Informe a medicação da doença'} 
-            value={medicacao} 
-            onChangeText={t=>setMedicacao(t)} 
+            label={'Resultado:'} 
+            placeholder={'Informe o resultado'} 
+            value={resultado} 
+            onChangeText={t=>setResultado(t)} 
             password={false} 
             keyboard={'default'}
           />
@@ -183,7 +180,7 @@ const Doencas = ({navigation}) => {
   )
 }
 
-export default Doencas
+export default Insumos
 
 const styles = StyleSheet.create({
   container:{

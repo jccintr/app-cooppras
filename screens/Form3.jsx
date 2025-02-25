@@ -1,5 +1,5 @@
-import { StyleSheet, Text, SafeAreaView,StatusBar,View, KeyboardAvoidingView,Platform, ScrollView,Alert } from 'react-native'
-import React, {useState,useEffect,useContext} from 'react'
+import { StyleSheet, Text, SafeAreaView,StatusBar,ScrollView,Alert } from 'react-native'
+import React, {useState,useContext} from 'react'
 import FormInput from '../components/FormInput';
 import YesNoInput from '../components/YesNoInput';
 import { voltagens } from '../data/data';

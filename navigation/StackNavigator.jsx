@@ -10,7 +10,9 @@ import Ovinos from '../screens/Ovinos';
 import ProducaoAnual from '../screens/ProducaoAnual';
 import Demais from '../screens/Demais';
 import Doencas from '../screens/Doencas';
-import AddButton from '../components/AddButton';
+import Insumos from '../screens/Insumos';
+import Local from '../screens/Local';
+import Anotacoes from '../screens/Anotacoes';
 
 
 const Stack = createNativeStackNavigator();
@@ -28,6 +30,9 @@ const StackNavigator = () => {
        <Stack.Screen name='ovinos' component={Ovinos} options={{headerTitle:'Rebanho de Ovinos'}}/>
        <Stack.Screen name='producaoAnual' component={ProducaoAnual} options={{headerTitle:'Boletim de Produção Anual'}}/>
        <Stack.Screen name='doencas' component={Doencas} options={{headerTitle:'Ocorrência de Doenças'}}/>
+       <Stack.Screen name='insumos' component={Insumos} options={{headerTitle:'Uso de Insumos'}}/>
+       <Stack.Screen name='local' component={Local} options={{headerTitle:'Local e Data'}}/>
+       <Stack.Screen name='anotacoes' component={Anotacoes} options={{headerTitle:'Anotações'}}/>
        <Stack.Screen name='demais' component={Demais} options={{headerTitle:'Demais Produção Agropecuária'}}/>
     </Stack.Navigator>
   )
