@@ -122,7 +122,7 @@ export const htmlDetalhesPropriedade = (isCarGlobal,areaTotalConsolidadaGlobal,a
 
 export const htmlDetalhesPropriedade2 = (pastagemNativaGlobal, pastagemCultivadaGlobal,areaPastagemCultivadaGlobal,
   cercado1AreaGlobal,cercado1FinalidadeGlobal,cercado2AreaGlobal,cercado2FinalidadeGlobal,outrasAreasGlobal,
-  familiasTrabalhandoGlobal,familiasHabitandoGlobal) => {
+  familiasTrabalhandoGlobal,familiasHabitandoGlobal,proprietarioGlobal,cpfProprietarioGlobal,telefoneProprietarioGlobal) => {
 
  
   let html = `
@@ -133,6 +133,9 @@ export const htmlDetalhesPropriedade2 = (pastagemNativaGlobal, pastagemCultivada
   <p class="label">Outras Áreas Específicas: <span>${outrasAreasGlobal} m<sup>2</sup></span></p>
   <p class="label">Número de Famílias Trabalhando: <span>${familiasTrabalhandoGlobal}</span></p>
   <p class="label">Número de Famílias Habitando: <span>${familiasHabitandoGlobal}</span></p>
+  <p class="label">Proprietário: <span>${proprietarioGlobal}</span></p>
+  <p class="label">CPF do Proprietário: <span>${cpfProprietarioGlobal}</span></p>
+  <p class="label">Telefone do Proprietário: <span>${telefoneProprietarioGlobal}</span></p>
   `
 
    return html
@@ -179,12 +182,20 @@ export const htmlRebanhoCaprinos = (caprinosGlobal) => {
     </tbody>
    
 </table>
+<p class="label">Linha: <span></span></p>
+<p class="label">Linha: <span></span></p>
+<p class="label">Linha: <span></span></p>
+<p class="label">Linha: <span></span></p>
+<p class="label">Linha: <span></span></p>
+<p class="label">Linha: <span></span></p>
+<p class="label">Linha: <span></span></p>
+
   `
 
   return html;
 }
 
-export const htmlRebanhoOvinos = (ovinosGlobal) => {
+export const htmlRebanhoOvinos = (ovinosGlobal,racaPredominanteGlobal,sistemaConfinamentoGlobal) => {
   const label = ['Matriz','Reprodutor','Em aleitamento','Machos desmamados','Fêmeas desmamadas','Machos > 1 ano'];
   let html = `<h4>REBANHO DE DE OVINOS</h4>
   <table>
@@ -222,8 +233,9 @@ export const htmlRebanhoOvinos = (ovinosGlobal) => {
     </tbody>
    
 </table>
-<p></p>
 
+<p class="label">Raça Predominante: <span>${racaPredominanteGlobal}</span></p>
+<p class="label">Sistema de Confinamento: <span>${sistemaConfinamentoGlobal}</span></p>
   `
 
   return html;
@@ -268,6 +280,13 @@ export const htmlBoletimProdudaoAnual = (producaoAnualGlobal) => {
 </tbody>
 
 </table>
+<p class="label">Linha: <span></span></p>
+<p class="label">Linha: <span></span></p>
+<p class="label">Linha: <span></span></p>
+<p class="label">Linha: <span></span></p>
+<p class="label">Linha: <span></span></p>
+<p class="label">Linha: <span></span></p>
+
 
 `
 

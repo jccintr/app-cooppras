@@ -6,6 +6,30 @@ import Botao from '../components/reusable/Botao';
 import FormInput from '../components/FormInput';
 import { DadosContext } from '../contexts/DadosContext';
 import { cores } from '../styles/cores';
+
+
+const insertPhoneMask = (phone) => {
+
+  const noMask = phone.replace(/\D/g, '');
+  const { length } = noMask;
+  if (length <= 11) {
+    return noMask
+      .replace(/(\d{2})(\d)/, '($1) $2')
+      .replace(length === 11 ? /(\d{5})(\d)/ : /(\d{4})(\d)/, '$1-$2');
+  }
+  return phone;
+
+}
+
+const insertCpfMask = (value) => {
+ // Remove tudo que não for número
+ value = value.replace(/\D/g, "");
+ // Aplica a máscara
+ value = value.replace(/(\d{3})(\d)/, "$1.$2");
+ value = value.replace(/(\d{3})(\d)/, "$1.$2");
+ value = value.replace(/(\d{3})(\d{2})$/, "$1-$2");
+ return value
+}
   
 const insertCepMask = (value) => {
   
@@ -22,6 +46,7 @@ const Form2 = ({navigation}) => {
     const {nomeImovelGlobal,setNomeImovelGlobal,areaTotalClobal,setAreaTotalGlobal,regiaoGlobal,setRegiaoGlobal} = useContext(DadosContext);
     const {distanciaSedeGlobal,setDistanciaSedeGlobal,coordGeoGlobal,setCoordGeoGlobal,municipioGlobal,setMunicipioGlobal} = useContext(DadosContext);
     const {cepGlobal,setCepGlobal,natOcupacaoGlobal,setNatOcupacaoGlobal,incraGlobal,setIncraGlobal,nirfGlobal,setNirfGlobal} = useContext(DadosContext);
+    const {proprietarioGlobal,setProprietarioGlobal,cpfProprietarioGlobal,setCpfProprietarioGlobal,telefoneProprietarioGlobal,setTelefoneProprietarioGlobal} = useContext(DadosContext);
 
     const [nomeImovel,setNomeImovel] = useState(nomeImovelGlobal);
     const [areaTotal,setAreaTotal] = useState(areaTotalClobal);
@@ -33,10 +58,21 @@ const Form2 = ({navigation}) => {
     const [natOcupacao,setNatOcupacao] = useState(natOcupacaoGlobal);
     const [incra,setIncra] = useState(incraGlobal);
     const [nirf,setNirf] = useState(nirfGlobal);
+    const [proprietario,setProprietario] = useState(proprietarioGlobal);
+    const [cpfProprietario,setCpfProprietario] = useState(cpfProprietarioGlobal);
+    const [telefoneProprietario,setTelefoneProprietario] = useState(telefoneProprietarioGlobal)
 
 useEffect(() => {
   setCep(insertCepMask(cep));
 }, [cep]);
+
+ useEffect(() => {
+    setTelefoneProprietario(insertPhoneMask(telefoneProprietario));
+ }, [telefoneProprietario]);
+
+ useEffect(() => {
+  setCpfProprietario(insertCpfMask(cpfProprietario));
+}, [cpfProprietario]);
 
 const saveData = () => {
 
@@ -86,6 +122,9 @@ const saveData = () => {
   setNatOcupacaoGlobal(natOcupacao);
   setIncraGlobal(incra);
   setNirfGlobal(nirf);
+  setProprietarioGlobal(proprietario);
+  setCpfProprietarioGlobal(cpfProprietario);
+  setTelefoneProprietarioGlobal(telefoneProprietario);
   
   navigation.goBack();
 }
@@ -105,8 +144,11 @@ const saveData = () => {
                 <SelectInput value={municipio} label={'Município:'} placeholder={'Selecione o Município'} modalTitle={'Selecione o Município'} options={cidades} onChangeSelect={setMunicipio}/>
                 <FormInput keyboardType='number-pad' label={'CEP:'} value={cep} onChangeText={t=>setCep(t)} placeholder="Informe o CEP do imóvel"/>
                 <SelectInput value={natOcupacao} label={'Natureza da Ocupação:'} placeholder={'Selecione a natureza da ocupação'} modalTitle={'Selecione a natureza da ocupação'} options={naturezaOcupacao} onChangeSelect={setNatOcupacao}/>
-                <FormInput label={'INCRA Nº:'} value={incra} onChangeText={t=>setIncra(t)}placeholder={'Informe o núemro do INCRA'} keyboardType={'number-pad'}/>
+                <FormInput label={'INCRA Nº:'} value={incra} onChangeText={t=>setIncra(t)} placeholder={'Informe o número do INCRA'} keyboardType={'number-pad'}/>
                 <FormInput label={'NIRF Nº:'} value={nirf} onChangeText={t=>setNirf(t)}placeholder={'Informe o número do NIRF'} keyboardType={'number-pad'}/>
+                <FormInput label={'Proprietário:'} value={proprietario} onChangeText={t=>setProprietario(t)} placeholder="Informe o proprietário do imóvel"/>
+                <FormInput label={'CPF:'} value={cpfProprietario} onChangeText={t=>setCpfProprietario(t)} placeholder={'Informe o CPF do proprietário'} keyboardType={'number-pad'}/>
+                <FormInput label={'Telefone:'} value={telefoneProprietario} onChangeText={t=>setTelefoneProprietario(t)} placeholder={'Informe o telefone do proprietário'} keyboardType={'number-pad'}/>
                 <Botao 
                     onPress={()=>saveData()} 
                     text={'SALVAR'} 

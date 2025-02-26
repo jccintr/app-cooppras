@@ -22,6 +22,7 @@ const Etapas = ({navigation}) => {
     const {nomeImovelGlobal,areaTotalClobal,regiaoGlobal} = useContext(DadosContext);
     const {distanciaSedeGlobal,coordGeoGlobal,municipioGlobal} = useContext(DadosContext);
     const {cepGlobal,natOcupacaoGlobal,incraGlobal,nirfGlobal} = useContext(DadosContext);
+    const {proprietarioGlobal,cpfProprietarioGlobal,telefoneProprietarioGlobal} = useContext(DadosContext);
 
     const {isCarGlobal,areaTotalConsolidadaGlobal,areaReservaLegalGlobal,areaReconhecidaAppGlobal} = useContext(DetalhesContext);
     const {areaLitigioGlobal,fonteAguaPotavelGlobal,possuiRioGlobal,possuiRepresaGlobal} = useContext(DetalhesContext);
@@ -29,7 +30,7 @@ const Etapas = ({navigation}) => {
     const {pastagemCultivadaGlobal,areaPastagemCultivadaGlobal,cercado1AreaGlobal,cercado1FinalidadeGlobal} = useContext(DetalhesContext);
     const {cercado2AreaGlobal,cercado2FinalidadeGlobal,outrasAreasGlobal,familiasTrabalhandoGlobal,familiasHabitandoGlobal} = useContext(DetalhesContext);
         
-    const {caprinosGlobal,ovinosGlobal,producaoAnualGlobal,demaisProducaoGlobal,doencas,insumos} = useContext(TableContext);
+    const {caprinosGlobal,ovinosGlobal,producaoAnualGlobal,demaisProducaoGlobal,doencas,insumos,racaPredominanteGlobal,sistemaConfinamentoGlobal} = useContext(TableContext);
     const {dataVisitaGlobal,localGlobal,tecnicoGlobal,anotacoesGlobal} = useContext(LocalContext);
 
     const [isLoading,setIsLoading] = useState(false);
@@ -43,7 +44,7 @@ const criaPdf = async () => {
   htmlContent += htmlPageHeader(image,"1");
   htmlContent += htmlDocTitle();
   htmlContent += htmlCooperado(nomeGlobal,cpfGlobal,telefoneGlobal);
-  htmlContent += htmlDadosPropriedade(nomeImovelGlobal,areaTotalClobal,regiaoGlobal,distanciaSedeGlobal,coordGeoGlobal,municipioGlobal,cepGlobal,natOcupacaoGlobal,incraGlobal,nirfGlobal);
+  htmlContent += htmlDadosPropriedade(nomeImovelGlobal,areaTotalClobal,regiaoGlobal,distanciaSedeGlobal,coordGeoGlobal,municipioGlobal,cepGlobal,natOcupacaoGlobal,incraGlobal,nirfGlobal,proprietarioGlobal,cpfProprietarioGlobal,telefoneProprietarioGlobal);
   //htmlContent += htmlPageHeader(image,"2");
   htmlContent += htmlDetalhesPropriedade(isCarGlobal,areaTotalConsolidadaGlobal,areaReservaLegalGlobal,areaReconhecidaAppGlobal,
     areaLitigioGlobal,fonteAguaPotavelGlobal,possuiRioGlobal,possuiRepresaGlobal,
@@ -52,9 +53,10 @@ const criaPdf = async () => {
     htmlContent += htmlDetalhesPropriedade2(pastagemNativaGlobal,pastagemCultivadaGlobal,areaPastagemCultivadaGlobal,cercado1AreaGlobal,cercado1FinalidadeGlobal,
       cercado2AreaGlobal,cercado2FinalidadeGlobal,outrasAreasGlobal,familiasTrabalhandoGlobal,familiasHabitandoGlobal);
   htmlContent += htmlRebanhoCaprinos(caprinosGlobal);
-  htmlContent += htmlRebanhoOvinos(ovinosGlobal);
   htmlContent += htmlPageHeader(image,"3");
+  htmlContent += htmlRebanhoOvinos(ovinosGlobal,racaPredominanteGlobal,sistemaConfinamentoGlobal);
   htmlContent += htmlBoletimProdudaoAnual(producaoAnualGlobal);
+  htmlContent += htmlPageHeader(image,"4");
   htmlContent += htmlDemaisProducao(demaisProducaoGlobal);
   htmlContent += htmlDoencas(doencas);
   htmlContent += htmlInsumos(insumos);
