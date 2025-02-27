@@ -1,4 +1,4 @@
-import { StyleSheet, Text, SafeAreaView,StatusBar,View, KeyboardAvoidingView,Platform, ScrollView,Alert } from 'react-native'
+import { StyleSheet, SafeAreaView,StatusBar, ScrollView,Alert } from 'react-native'
 import React, {useState,useEffect,useContext} from 'react'
 import SelectInput from '../components/SelectInput';
 import { cidades,naturezaOcupacao } from '../data/data';
@@ -116,7 +116,7 @@ const saveData = () => {
   setAreaTotalGlobal(areaTotal);
   setRegiaoGlobal(regiao);
   setDistanciaSedeGlobal(distanciaSede);
-  setCoordGeoGlobal(coordGeoGlobal)
+  setCoordGeoGlobal(coordGeo)
   setMunicipioGlobal(municipio);
   setCepGlobal(cep);
   setNatOcupacaoGlobal(natOcupacao);

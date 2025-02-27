@@ -81,17 +81,23 @@ export default function App() {
     {quant:'',peso:'',valor:''},
     {quant:'',peso:'',valor:''}
   ]);
+  const [doencas,setDoencas] = useState([]);
+  /*
   const [doencas,setDoencas] = useState([
-    {id:1,tipo:'Gripe Aviária',perido:'',tratamento:'',medicacao:''},
-    {id:2,tipo:'Doença da Vaca Louca',periodo:'',tratamento:'',medicacao:''},
-    {id:3,tipo:'Gripe Suina',periodo:'',tratamento:'',medicacao:''},
-    {id:4,tipo:'Covid 19',periodo:'',tratamento:'',medicacao:''},
+    {id:1,tipo:'Gripe Aviária',periodo:'Jan a Fev',tratamento:'Rezar',medicacao:'rivotril'},
+    {id:2,tipo:'Doença da Vaca Louca',periodo:'quaresma',tratamento:'orar',medicacao:'certralina'},
+    {id:3,tipo:'Gripe Suina',periodo:'Julho',tratamento:'férias',medicacao:'cerveja'},
+    {id:4,tipo:'Covid 19',periodo:'ano todo',tratamento:'ficar em casa',medicacao:'cloroquina'},
   ]);
+  */
+  const [insumos,setInsumos] = useState([]);
+  /*
   const [insumos,setInsumos] = useState([
-    {id:1,tipo:'Farelo de Milho',periodo:'',quant:'',resultado:''},
-    {id:2,tipo:'Sal',periodo:'',quant:'',resultado:''},
-   
+    {id:1,tipo:'Farelo de Milho',periodo:'dez',quant:'50',resultado:'sei lá'},
+    {id:2,tipo:'Sal',periodo:'abril',quant:'20',resultado:'ótimo'},
+    {id:3,tipo:'Feno',periodo:'fev',quant:'20',resultado:'bom'},
   ]);
+  */
   const [dataVisitaGlobal,setDataVisitaGlobal] = useState('');
   const [localGlobal,setLocalGlobal] = useState('');
   const [tecnicoGlobal,setTecnicoGlobal] = useState('');

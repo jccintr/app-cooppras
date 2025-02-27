@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View,ScrollView,StatusBar } from 'react-native'
 import React,{useState,useContext} from 'react'
 import TableRowInput from '../components/TableRowInput'
 import TableHeader from '../components/TableHeader'
@@ -18,7 +18,7 @@ const Ovinos = ({navigation}) => {
       const [femeaDesmamada,setFemeaDesmamada] = useState(ovinosGlobal[4])
       const [machos1mais,setMacho1mais] = useState(ovinosGlobal[5])
       const [racaPredominante,setRacaPredominante] = useState(racaPredominanteGlobal);
-        const [sistemaConfinamento,setSistemaConfinamento] = useState(sistemaConfinamentoGlobal);
+      const [sistemaConfinamento,setSistemaConfinamento] = useState(sistemaConfinamentoGlobal);
 
       const saveData = () => {
         const newOvinos = [matriz,reprodutor,emAleitamento,machoDesmamado,femeaDesmamada,machos1mais];
@@ -30,6 +30,7 @@ const Ovinos = ({navigation}) => {
 
  return (
     <View style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
        <TableHeader/>
        <HeightSpacer h={10}/>
        <TableRowInput descricao="Matriz" data={matriz} setData={setMatriz}/>
@@ -45,7 +46,7 @@ const Ovinos = ({navigation}) => {
        <TableRowInput descricao="Machos > 1 ano" data={machos1mais} setData={setMacho1mais}/>
        <HeightSpacer h={10}/>
        <View style={{width:'100%'}}>
-       <FormInput label={'Raça Preedominante:'} value={racaPredominante} onChangeText={t=>setRacaPredominante(t)} placeholder="Informe a raça predominante"/>
+       <FormInput label={'Raça Predominante:'} value={racaPredominante} onChangeText={t=>setRacaPredominante(t)} placeholder="Informe a raça predominante"/>
        <HeightSpacer h={10}/>
       <FormInput label={'Sistema de Confinamento:'} value={sistemaConfinamento} onChangeText={t=>setSistemaConfinamento(t)} placeholder="Informe o sistema de confinamento"/>
       </View>
@@ -61,6 +62,7 @@ const Ovinos = ({navigation}) => {
             borderRadius={10} 
             isLoading={false}
                 />
+        </ScrollView>
     </View>
   )
 }

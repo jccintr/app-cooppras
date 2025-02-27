@@ -12,8 +12,8 @@ import { DadosContext } from '../contexts/DadosContext';
 import { DetalhesContext } from '../contexts/DetalhesContext';
 import { TableContext } from '../contexts/TableContext';
 import { LocalContext } from '../contexts/LocalContext';
-import { manipulateAsync } from 'expo-image-manipulator';
-import { Asset } from 'expo-asset';
+//import { manipulateAsync } from 'expo-image-manipulator';
+//import { Asset } from 'expo-asset';
 
 
 const Etapas = ({navigation}) => {
@@ -37,29 +37,38 @@ const Etapas = ({navigation}) => {
    
 
 const criaPdf = async () => {
-  const asset = Asset.fromModule(require('../assets/logo-pdf.png'));
-  const image = await manipulateAsync(asset.localUri ?? asset.uri, [], { base64: true });
+  //const asset = Asset.fromModule(require('../assets/logopdf.png'));
+  //const image = await manipulateAsync(asset.localUri ?? asset.uri, [], { base64: true });
 
   let htmlContent = htmlTopo();
-  htmlContent += htmlPageHeader(image,"1");
+  //htmlContent += htmlPageHeader(image,"1");
+  htmlContent += htmlPageHeader("1");
   htmlContent += htmlDocTitle();
   htmlContent += htmlCooperado(nomeGlobal,cpfGlobal,telefoneGlobal);
-  htmlContent += htmlDadosPropriedade(nomeImovelGlobal,areaTotalClobal,regiaoGlobal,distanciaSedeGlobal,coordGeoGlobal,municipioGlobal,cepGlobal,natOcupacaoGlobal,incraGlobal,nirfGlobal,proprietarioGlobal,cpfProprietarioGlobal,telefoneProprietarioGlobal);
-  //htmlContent += htmlPageHeader(image,"2");
+  htmlContent += htmlDadosPropriedade(nomeImovelGlobal,areaTotalClobal,regiaoGlobal,distanciaSedeGlobal,coordGeoGlobal,municipioGlobal,cepGlobal,natOcupacaoGlobal,incraGlobal,nirfGlobal);
+ 
   htmlContent += htmlDetalhesPropriedade(isCarGlobal,areaTotalConsolidadaGlobal,areaReservaLegalGlobal,areaReconhecidaAppGlobal,
     areaLitigioGlobal,fonteAguaPotavelGlobal,possuiRioGlobal,possuiRepresaGlobal,
     areaRepresaGlobal,possuiFonteEnergiaGlobal,voltagemGlobal);
-    htmlContent += htmlPageHeader(image,"2");
+   // htmlContent += htmlPageHeader(image,"2");
+    htmlContent += htmlPageHeader("2");
     htmlContent += htmlDetalhesPropriedade2(pastagemNativaGlobal,pastagemCultivadaGlobal,areaPastagemCultivadaGlobal,cercado1AreaGlobal,cercado1FinalidadeGlobal,
-      cercado2AreaGlobal,cercado2FinalidadeGlobal,outrasAreasGlobal,familiasTrabalhandoGlobal,familiasHabitandoGlobal);
+      cercado2AreaGlobal,cercado2FinalidadeGlobal,outrasAreasGlobal,familiasTrabalhandoGlobal,familiasHabitandoGlobal,proprietarioGlobal,cpfProprietarioGlobal,telefoneProprietarioGlobal);
   htmlContent += htmlRebanhoCaprinos(caprinosGlobal);
-  htmlContent += htmlPageHeader(image,"3");
+ // htmlContent += htmlPageHeader(image,"3");
+  htmlContent += htmlPageHeader("3");
   htmlContent += htmlRebanhoOvinos(ovinosGlobal,racaPredominanteGlobal,sistemaConfinamentoGlobal);
   htmlContent += htmlBoletimProdudaoAnual(producaoAnualGlobal);
-  htmlContent += htmlPageHeader(image,"4");
+ // htmlContent += htmlPageHeader(image,"4");
+  htmlContent += htmlPageHeader("4");
   htmlContent += htmlDemaisProducao(demaisProducaoGlobal);
-  htmlContent += htmlDoencas(doencas);
+  if(doencas.length>0){
+    htmlContent += htmlDoencas(doencas);
+  }
+ if(insumos.length>0){
   htmlContent += htmlInsumos(insumos);
+ }
+
   htmlContent += htmlLocal(dataVisitaGlobal,localGlobal,tecnicoGlobal,anotacoesGlobal);
   htmlContent += htmlFooter();
   const fileName = 'formulario-agropecuario.pdf';

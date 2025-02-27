@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "cooppras",
+    "name": "Cooppras",
     "slug": "cooppras",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,13 +19,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jccintr.cooppras"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-asset"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "43ea11cb-1bb3-4237-8f76-3553161379e5"
+      }
+    }
   }
 }

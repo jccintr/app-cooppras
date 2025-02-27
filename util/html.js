@@ -1,4 +1,4 @@
-
+/*
 export const htmlPageHeader = (image,page)=> {
 
   const html = `<header class="header">
@@ -10,6 +10,22 @@ export const htmlPageHeader = (image,page)=> {
 
   return html;
 }
+  */
+
+
+export const htmlPageHeader = (page)=> {
+
+  const html = `<header class="header">
+       
+        <h1>COOPERATIVA DE PEQUENOS PRODUTORES RURAIS DE ASSUNÇÃO DO PIAUÍ</h1>
+        <span class="page-number">Pág: ${page}</span>
+    </header>
+  `
+
+  return html;
+}
+  
+
 export const htmlTopo = () =>{
 
     const html = `<html>
@@ -26,8 +42,10 @@ export const htmlTopo = () =>{
        h4 {margin-left: 20px;}
        p.label {margin-left:20px;font-weight: bold}
        p span {font-weight: normal}
+       .notas {margin-left:20px;}
        span {margin-left: 20px;}
        .center {text-align: center;}
+       .row { height: 10px;border-bottom: 1px solid #000;}
        table {border:1px solid #b3adad;border-collapse:collapse;padding:5px;margin-left: 40px;}
 	   	table th {border:1px solid #b3adad;padding:5px;background: #f0f0f0;color: #313030;}
 	  	table td {border:1px solid #b3adad;text-align:center;padding:5px;	background: #ffffff;color: #313030;}
@@ -77,7 +95,7 @@ export const htmlDadosPropriedade = (nomeImovelGlobal,areaTotalClobal,regiaoGlob
   <p class="label">Área Total: <span>${areaTotalClobal} m<sup>2</sup></span></p>
   <p class="label">Região: <span>${regiaoGlobal}</span></p>
   <p class="label">Distância da Sede: <span>${distanciaSedeGlobal} km</span></p>
-  <p class="label">Coordenadas Geográficas: <span>${coordGeoGlobal||'CAMPO NÃO INFORMADO'}</span></p>
+  <p class="label">Coordenadas Geográficas: <span>${coordGeoGlobal||'Não informado'}</span></p>
   <p class="label">Município: <span>${municipioGlobal}/PI</span></p>
   <p class="label">CEP: <span>${cepGlobal}</span></p>
   <p class="label">Natureza da Ocupação: <span>${natOcupacaoGlobal}</span></p>
@@ -128,8 +146,8 @@ export const htmlDetalhesPropriedade2 = (pastagemNativaGlobal, pastagemCultivada
   let html = `
   <p class="label">Pastagem Nativa Predominante: <span>${pastagemNativaGlobal}</span></p>
   <p class="label">Pastagem Cultivada: <span>${pastagemCultivadaGlobal}</span> Área: <span>${areaPastagemCultivadaGlobal} m<sup>2</sup></span></p>
-  <p class="label">Cercado 1: <span>${cercado1AreaGlobal}m2</span> Finalidade: <span>${cercado1FinalidadeGlobal}</span></p>
-  <p class="label">Cercado 2: <span>${cercado2AreaGlobal}m2</span> Finalidade: <span>${cercado2FinalidadeGlobal}</span></p>
+  <p class="label">Cercado 1: <span>${cercado1AreaGlobal}m<sup>2</sup></span> Finalidade: <span>${cercado1FinalidadeGlobal}</span></p>
+  <p class="label">Cercado 2: <span>${cercado2AreaGlobal}m<sup>2</sup></span> Finalidade: <span>${cercado2FinalidadeGlobal}</span></p>
   <p class="label">Outras Áreas Específicas: <span>${outrasAreasGlobal} m<sup>2</sup></span></p>
   <p class="label">Número de Famílias Trabalhando: <span>${familiasTrabalhandoGlobal}</span></p>
   <p class="label">Número de Famílias Habitando: <span>${familiasHabitandoGlobal}</span></p>
@@ -182,14 +200,14 @@ export const htmlRebanhoCaprinos = (caprinosGlobal) => {
     </tbody>
    
 </table>
-<p class="label">Linha: <span></span></p>
-<p class="label">Linha: <span></span></p>
-<p class="label">Linha: <span></span></p>
-<p class="label">Linha: <span></span></p>
-<p class="label">Linha: <span></span></p>
-<p class="label">Linha: <span></span></p>
-<p class="label">Linha: <span></span></p>
-
+ <p class="label"><pre> </pre></p>
+ <p class="label"><pre> </pre></p>
+ <p class="label"><pre> </pre></p>
+ <p class="label"><pre> </pre></p>
+ <p class="label"><pre> </pre></p>
+ <p class="label"><pre> </pre></p>
+ <p class="label"><pre> </pre></p>
+ <p class="label"><pre> </pre></p>
   `
 
   return html;
@@ -280,13 +298,14 @@ export const htmlBoletimProdudaoAnual = (producaoAnualGlobal) => {
 </tbody>
 
 </table>
-<p class="label">Linha: <span></span></p>
-<p class="label">Linha: <span></span></p>
-<p class="label">Linha: <span></span></p>
-<p class="label">Linha: <span></span></p>
-<p class="label">Linha: <span></span></p>
-<p class="label">Linha: <span></span></p>
-
+<p class="label"><pre> </pre></p>
+ <p class="label"><pre> </pre></p>
+ <p class="label"><pre> </pre></p>
+ <p class="label"><pre> </pre></p>
+ <p class="label"><pre> </pre></p>
+ <p class="label"><pre> </pre></p>
+ <p class="label"><pre> </pre></p>
+ 
 
 `
 
@@ -417,8 +436,9 @@ export const htmlLocal = (data,local,tecnico,anotacoes) => {
 <p class="label">Local da Visita: <span>${local}</span></p>
 <p class="label">Responsável Técnico: <span>${tecnico}</span></p>
 <p class="label">Anotações:</p>
-<span>${anotacoes}</span>
-
+<div class="notas">
+  <p>${anotacoes}</p>
+<div>
   `
 
   return html;
